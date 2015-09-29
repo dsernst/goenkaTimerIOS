@@ -20,14 +20,12 @@ var times = ['2', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55
 var goenkaTimerIOS = React.createClass({
   getInitialState: function() {
     return {
-      carMake: 'cadillac',
-      modelIndex: 6,
+      duration: '15',
     };
   },
 
 
   render: function() {
-    // var selectionString = make.name + ' ' + make.models[this.state.modelIndex];
     return (
       <View style={styles.container}>
 
@@ -35,13 +33,13 @@ var goenkaTimerIOS = React.createClass({
           How long would you like to sit?
         </Text>
         <PickerIOS
-          selectedValue={this.state.carMake}
-          onValueChange={(carMake) => this.setState({carMake, modelIndex: 0})}>
-          {times.map((carMake) => (
+          selectedValue={this.state.duration}
+          onValueChange={(duration) => this.setState({duration})}>
+          {times.map((duration) => (
             <PickerItemIOS
-              key={carMake}
-              value={carMake}
-              label={carMake + ' minutes'}
+              key={duration}
+              value={duration}
+              label={duration + ' minutes'}
               />
             )
           )}
