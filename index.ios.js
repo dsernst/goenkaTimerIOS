@@ -69,6 +69,14 @@ var PlaybackScreen = React.createClass({
         <Text style={styles.welcome}>
           On playback Screen
         </Text>
+        <Button
+         style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
+         onPress={function() {
+           this.props.navigator.pop();
+         }.bind(this) }
+        >
+          Stop
+        </Button>
       </View>
     )
   }
