@@ -29,6 +29,10 @@ var goenkaTimerIOS = React.createClass({
     return (
       <View style={styles.container}>
 
+        <Text style={styles.title}>
+          Goenka Timer
+        </Text>
+
         <Text style={styles.welcome}>
           How long would you like to sit?
         </Text>
@@ -55,6 +59,11 @@ var goenkaTimerIOS = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  title: {
+    fontSize: 34,
+    textAlign: 'center',
+    marginBottom: 55,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
