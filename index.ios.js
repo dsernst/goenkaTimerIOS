@@ -46,7 +46,7 @@ var ConfigScreen = React.createClass({
         </PickerIOS>
 
         <Button
-         style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
+         style={{borderWidth: 1, borderColor: 'green', color:'green', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
          onPress={function() {
            console.log('Sit for ' + this.state.duration + ' minutes');
            this.props.navigator.push({
@@ -71,7 +71,7 @@ var PlaybackScreen = React.createClass({
           {this.props.route.duration}:00
         </Text>
         <Button
-         style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
+         style={{borderWidth: 1, borderColor: 'red', color: 'red', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
          onPress={function() {
            this.props.navigator.pop();
          }.bind(this) }
