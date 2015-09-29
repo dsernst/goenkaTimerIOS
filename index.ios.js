@@ -11,6 +11,7 @@ var {
   Text,
   View,
   PickerIOS,
+  Navigator,
 } = React;
 var Button = require('react-native-button');
 
@@ -18,22 +19,16 @@ var PickerItemIOS = PickerIOS.Item;
 
 var times = ['2', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60']
 
-var goenkaTimerIOS = React.createClass({
+var ConfigScreen = React.createClass({
   getInitialState: function() {
     return {
       duration: '15',
     };
   },
 
-
   render: function() {
     return (
       <View style={styles.container}>
-
-        <Text style={styles.title}>
-          Goenka Timer
-        </Text>
-
         <Text style={styles.welcome}>
           How long would you like to sit?
         </Text>
@@ -56,6 +51,52 @@ var goenkaTimerIOS = React.createClass({
         >
           Start!
         </Button>
+      </View>
+    )
+  }
+})
+
+var PlaybackScreen = React.createClass({
+  render: function() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          On playback Screen
+        </Text>
+      </View>
+    )
+  }
+})
+
+var goenkaTimerIOS = React.createClass({
+  render: function() {
+    return (
+      <View style={styles.container}>
+
+        <Text style={styles.title}>
+          Goenka Timer
+        </Text>
+
+        <Navigator
+          initialRoute={{name: 'Config Screen', index: 0}}
+          renderScene={(route, navigator) =>
+            <PlaybackScreen
+              name={route.name}
+              onForward={() => {
+                var nextIndex = route.index + 1;
+                navigator.push({
+                  name: 'Scene ' + nextIndex,
+                  index: nextIndex,
+                });
+              }}
+              onBack={() => {
+                if (route.index > 0) {
+                  navigator.pop();
+                }
+              }}
+            />
+          }
+        />
 
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
@@ -70,12 +111,11 @@ var styles = StyleSheet.create({
   title: {
     fontSize: 34,
     textAlign: 'center',
-    marginBottom: 55,
+    marginTop: 75,
   },
   container: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
