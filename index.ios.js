@@ -47,7 +47,13 @@ var ConfigScreen = React.createClass({
 
         <Button
          style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
-         onPress={function() {console.log('Sit for ' + this.state.duration + ' minutes');}.bind(this) }
+         onPress={function() {
+           console.log('Sit for ' + this.state.duration + ' minutes');
+           this.props.navigator.push({
+             name: 'PlaybackScreen',
+             component: PlaybackScreen
+           });
+         }.bind(this) }
         >
           Start!
         </Button>
@@ -78,24 +84,15 @@ var goenkaTimerIOS = React.createClass({
         </Text>
 
         <Navigator
-          initialRoute={{name: 'Config Screen', index: 0}}
-          renderScene={(route, navigator) =>
-            <PlaybackScreen
-              name={route.name}
-              onForward={() => {
-                var nextIndex = route.index + 1;
-                navigator.push({
-                  name: 'Scene ' + nextIndex,
-                  index: nextIndex,
-                });
-              }}
-              onBack={() => {
-                if (route.index > 0) {
-                  navigator.pop();
-                }
-              }}
-            />
-          }
+          initialRoute={{name: 'Config Screen', component: ConfigScreen}}
+          renderScene={(route, navigator) => {
+            // count the number of func calls
+            console.log(route, navigator);
+
+            if (route.component) {
+              return React.createElement(route.component, { navigator });
+            }
+          }}
         />
 
         <Text style={styles.instructions}>
