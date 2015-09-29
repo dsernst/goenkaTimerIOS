@@ -12,6 +12,7 @@ var {
   View,
   PickerIOS,
 } = React;
+var Button = require('react-native-button');
 
 var PickerItemIOS = PickerIOS.Item;
 
@@ -48,6 +49,13 @@ var goenkaTimerIOS = React.createClass({
             )
           )}
         </PickerIOS>
+
+        <Button
+         style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
+         onPress={function() {console.log('Sit for ' + this.state.duration + ' minutes');}.bind(this) }
+        >
+          Start!
+        </Button>
 
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
