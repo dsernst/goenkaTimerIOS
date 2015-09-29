@@ -51,7 +51,8 @@ var ConfigScreen = React.createClass({
            console.log('Sit for ' + this.state.duration + ' minutes');
            this.props.navigator.push({
              name: 'PlaybackScreen',
-             component: PlaybackScreen
+             component: PlaybackScreen,
+             duration: this.state.duration,
            });
          }.bind(this) }
         >
@@ -66,8 +67,8 @@ var PlaybackScreen = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          On playback Screen
+        <Text style={styles.clock}>
+          {this.props.route.duration}:00
         </Text>
         <Button
          style={{borderWidth: 1, borderColor: 'blue', padding: 10, flex: 2, margin: 10, borderRadius: 5}}
@@ -92,13 +93,13 @@ var goenkaTimerIOS = React.createClass({
         </Text>
 
         <Navigator
-          initialRoute={{name: 'Config Screen', component: ConfigScreen}}
+          initialRoute={{name: 'Config Screen', component: ConfigScreen, duration: '15'}}
           renderScene={(route, navigator) => {
             // count the number of func calls
-            console.log(route, navigator);
+            console.log(route);
 
             if (route.component) {
-              return React.createElement(route.component, { navigator });
+              return React.createElement(route.component, { navigator, route });
             }
           }}
         />
@@ -133,6 +134,11 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  clock: {
+    fontSize: 50,
+    textAlign: 'center',
+    marginBottom: 130,
+  }
 });
 
 AppRegistry.registerComponent('goenkaTimerIOS', () => goenkaTimerIOS);
